@@ -17,18 +17,13 @@ func Valid(number string) bool {
 		if !unicode.IsDigit(runes[i]) {
 			return false
 		}
+		d := int(runes[i] - '0')
 		if alternative {
-			d := runes[i] - '0'
 			if d *= 2; d > 9 {
-				sum += int(d) - 9
-			} else {
-				sum += int(d)
+				d -= 9
 			}
-
-		} else {
-			d := runes[i] - '0'
-			sum = sum + int(d)
 		}
+		sum += d
 		alternative = !alternative
 	}
 	return sum%10 == 0
